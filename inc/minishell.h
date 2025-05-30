@@ -6,7 +6,7 @@
 /*   By: sbenitez <sbenitez@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/07 17:08:56 by sbenitez          #+#    #+#             */
-/*   Updated: 2025/05/30 14:29:44 by sbenitez         ###   ########.fr       */
+/*   Updated: 2025/05/30 14:42:02 by sbenitez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -175,6 +175,7 @@ int		exec_unset(t_shell *shell, t_cmd *cmd);
 void	free_paths(char **paths, int i);
 char	*ft_search_in_paths(char **paths, char *comm);
 char	*ft_path(char *path, char **comm);
+void	ft_handle_command_execution(t_shell *shell, t_cmd *cmd, char *path);
 void	execute_command(t_shell *shell, t_cmd *cmd);
 
 // EXECUTER.C

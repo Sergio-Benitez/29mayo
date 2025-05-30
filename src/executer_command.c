@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: sbenitez <sbenitez@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/05/27 12:28:22 by sbenitez          #+#    #+#             */
-/*   Updated: 2025/05/30 14:30:56 by sbenitez         ###   ########.fr       */
+/*   Created: 2025/05/30 14:42:31 by sbenitez          #+#    #+#             */
+/*   Updated: 2025/05/30 14:42:32 by sbenitez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,32 +60,10 @@ char	*ft_path(char *path, char **comm)
 	return (ft_search_in_paths(paths, comm[0]));
 }
 
-void	execute_command(t_shell *shell, t_cmd *cmd)
+void	ft_handle_command_execution(t_shell *shell, t_cmd *cmd, char *path)
 {
-	int		i;
-	char	*path;
-	char	**env;
+	int	i;
 
-	i = 0;
-	env = shell->env;
-	if (!cmd->args || !cmd->args[0])
-	{
-		ft_putstr_fd("Error: empty command\n", 2);
-		exit (127);
-	}
-	if (cmd->args[0][0] == '\0')
-	{
-		ft_putstr_fd("minishell: command '' not found\n", 2);
-		exit (127);
-	}
-	while (env[i] && ft_strnstr(env[i], "PATH", 4) == 0)
-		i++;
-	if (!ft_strchr(cmd->args[0], '/') && !(env[i]))
-	{
-		ft_putstr_fd("No PATH found\n", 2);
-		exit (127);
-	}
-	path = ft_path((env[i]), cmd->args);
 	i = 0;
 	if (!path)
 	{
@@ -97,11 +75,40 @@ void	execute_command(t_shell *shell, t_cmd *cmd)
 		free(cmd->args);
 		exit(127);
 	}
-	execve(path, cmd->args, env);
+	execve(path, cmd->args, shell->env);
 	perror("Error executing.\n");
 	while (cmd->args && cmd->args[i])
 		free(cmd->args[i++]);
 	free(cmd->args);
 	free(path);
 	exit(126);
+}
+
+void	execute_command(t_shell *shell, t_cmd *cmd)
+{
+	int		i;
+	char	*path;
+	char	**env;
+
+	i = 0;
+	env = shell->env;
+	if (!cmd->args || !cmd->args[0])
+	{
+		ft_putstr_fd("Error: empty command\n", 2);
+		exit(127);
+	}
+	if (cmd->args[0][0] == '\0')
+	{
+		ft_putstr_fd("minishell: command '' not found\n", 2);
+		exit(127);
+	}
+	while (env[i] && ft_strnstr(env[i], "PATH", 4) == 0)
+		i++;
+	if (!ft_strchr(cmd->args[0], '/') && !(env[i]))
+	{
+		ft_putstr_fd("No PATH found\n", 2);
+		exit(127);
+	}
+	path = ft_path((env[i]), cmd->args);
+	ft_handle_command_execution(shell, cmd, path);
 }
