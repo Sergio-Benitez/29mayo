@@ -6,7 +6,7 @@
 /*   By: sbenitez <sbenitez@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/27 12:28:22 by sbenitez          #+#    #+#             */
-/*   Updated: 2025/05/30 14:23:48 by sbenitez         ###   ########.fr       */
+/*   Updated: 2025/05/30 14:30:56 by sbenitez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,27 +19,17 @@ void	free_paths(char **paths, int i)
 	free(paths);
 }
 
-char	*ft_path(char *path, char **comm)
+char	*ft_search_in_paths(char **paths, char *comm)
 {
-	char	**paths;
 	char	*route;
 	char	*tmp;
 	int		i;
 
-	if (ft_strchr(comm[0], '/'))
-	{
-		if (access(comm[0], F_OK | X_OK) == 0)
-			return (ft_strdup(comm[0]));
-		return (0);
-	}
-	if (!path)
-		return (NULL);
-	paths = ft_split(path + 5, ':');
 	i = 0;
 	while (paths[i])
 	{
 		tmp = ft_strjoin(paths[i], "/");
-		route = ft_strjoin(tmp, *comm);
+		route = ft_strjoin(tmp, comm);
 		free(tmp);
 		if (access(route, F_OK | X_OK) == 0)
 		{
@@ -51,7 +41,23 @@ char	*ft_path(char *path, char **comm)
 	}
 	i = 0;
 	free_paths(paths, i);
-	return (0);
+	return (NULL);
+}
+
+char	*ft_path(char *path, char **comm)
+{
+	char	**paths;
+
+	if (ft_strchr(comm[0], '/'))
+	{
+		if (access(comm[0], F_OK | X_OK) == 0)
+			return (ft_strdup(comm[0]));
+		return (NULL);
+	}
+	if (!path)
+		return (NULL);
+	paths = ft_split(path + 5, ':');
+	return (ft_search_in_paths(paths, comm[0]));
 }
 
 void	execute_command(t_shell *shell, t_cmd *cmd)
