@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   signals.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pruiz-al <pruiz-al@student.42.fr>          +#+  +:+       +#+        */
+/*   By: sbenitez <sbenitez@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/08 17:52:12 by sbenitez          #+#    #+#             */
-/*   Updated: 2025/05/29 20:05:10 by pruiz-al         ###   ########.fr       */
+/*   Updated: 2025/05/30 18:49:41 by sbenitez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,8 +44,6 @@ void	ft_handle_sigint(int signum)
 		write(1, "\n", 1);
 		exit(130);
 	}
-	else
-		fprintf(stderr, "sefue: %i\n", g_signal_flag);
 }
 
 void	ft_setup_signals(void)

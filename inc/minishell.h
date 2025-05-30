@@ -6,7 +6,7 @@
 /*   By: sbenitez <sbenitez@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/07 17:08:56 by sbenitez          #+#    #+#             */
-/*   Updated: 2025/05/30 15:29:25 by sbenitez         ###   ########.fr       */
+/*   Updated: 2025/05/30 17:34:05 by sbenitez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@
 # define RR2 5
 # define LR1 6
 # define LR2 7
-# define LOL 99
+# define LOL 999
 
 extern int	g_signal_flag;
 

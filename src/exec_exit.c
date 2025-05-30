@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_exit.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pruiz-al <pruiz-al@student.42.fr>          +#+  +:+       +#+        */
+/*   By: sbenitez <sbenitez@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/27 12:06:24 by sbenitez          #+#    #+#             */
-/*   Updated: 2025/05/29 19:55:59 by pruiz-al         ###   ########.fr       */
+/*   Updated: 2025/05/30 17:52:28 by sbenitez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,7 @@ void	exec_exit(t_shell *ms, t_cmd *cmd, int prevfd)
 	{
 		if (!ft_isnum(cmd->args[1]))
 		{
+			printf("exit\n");
 			printf("minishell: exit: %s: numeric arg required\n", cmd->args[1]);
 			free_exit(ms);
 			exit(2);

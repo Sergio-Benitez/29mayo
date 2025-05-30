@@ -6,7 +6,7 @@
 /*   By: sbenitez <sbenitez@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/30 15:23:36 by sbenitez          #+#    #+#             */
-/*   Updated: 2025/05/30 15:29:22 by sbenitez         ###   ########.fr       */
+/*   Updated: 2025/05/30 18:20:36 by sbenitez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ void	child_process(t_cmd *cmd, int prevfd, int pipefd[2], t_shell *ms)
 		close(pipefd[0]);
 		close(pipefd[1]);
 	}
+	signal(SIGQUIT, SIG_IGN);
 	if (cmd->is_btn)
 	{
 		execute_builtin(ms, cmd, prevfd);

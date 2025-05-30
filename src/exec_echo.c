@@ -6,7 +6,7 @@
 /*   By: sbenitez <sbenitez@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/19 17:22:07 by sbenitez          #+#    #+#             */
-/*   Updated: 2025/05/28 14:25:51 by sbenitez         ###   ########.fr       */
+/*   Updated: 2025/05/30 18:05:05 by sbenitez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,8 @@ int	exec_echo(t_cmd *cmd)
 	int	fd;
 	int	ret;
 
+	if (cmd->exit_status == 1)
+		return (1);
 	fd = dup(STDOUT_FILENO);
 	if (cmd->outfile)
 		ft_redir_outfile(cmd->outfile, cmd->append);
