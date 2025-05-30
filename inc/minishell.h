@@ -6,7 +6,7 @@
 /*   By: sbenitez <sbenitez@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/07 17:08:56 by sbenitez          #+#    #+#             */
-/*   Updated: 2025/05/30 14:42:02 by sbenitez         ###   ########.fr       */
+/*   Updated: 2025/05/30 15:29:25 by sbenitez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,6 +107,10 @@ int		ft_has_commands(t_shell *shell);
 char	*ft_remove_quotes(char *tkn);
 void	ft_dequotize(t_shell *shell);
 
+// EXEC_BUILTINS.C
+
+void	execute_builtin(t_shell *ms, t_cmd *cmd, int prevfd);
+
 // EXEC_CD_UTILS.C
 
 int		ft_check_errors(t_shell *shell, char *oldpwd, char *path);
@@ -180,10 +184,10 @@ void	execute_command(t_shell *shell, t_cmd *cmd);
 
 // EXECUTER.C
 
-void	execute_builtin(t_shell *ms, t_cmd *cmd, int prevfd);
 void	child_process(t_cmd *cmd, int prevfd, int pipefd[2], t_shell *ms);
 void	parent_process(t_shell *ms, int *prevfd, int pipefd[2]);
 void	ft_wait_all_processes(pid_t *pids, t_shell *ms);
+pid_t	ft_exec_single_cmd(t_cmd *cmd, int *prevfd, int *pipefd, t_shell *ms);
 void	ft_exec_commands(t_shell *ms);
 
 // EXPAND_EXITSTATUS.C
@@ -235,6 +239,7 @@ void	ft_update_join(t_token **lst);
 
 // MAIN.C
 
+int		ft_read_input(t_shell *shell);
 void	ft_minishell(t_shell *shell);
 
 // PROCESS_REDIRECTION.C //
