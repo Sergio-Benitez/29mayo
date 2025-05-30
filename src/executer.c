@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   executer.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pruiz-al <pruiz-al@student.42.fr>          +#+  +:+       +#+        */
+/*   By: sbenitez <sbenitez@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/27 12:02:24 by sbenitez          #+#    #+#             */
-/*   Updated: 2025/05/29 19:54:44 by pruiz-al         ###   ########.fr       */
+/*   Updated: 2025/05/30 11:53:55 by sbenitez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -138,8 +138,6 @@ void	ft_exec_commands(t_shell *ms)
 				exit(ms->exit_status);
 			cmd = cmd->next;
 		}
-		//AKI SEGURO
-	//waitpidloop
 		i++;
 	}
 	ft_wait_all_processes(pids, ms);

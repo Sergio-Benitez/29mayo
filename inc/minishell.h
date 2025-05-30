@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pruiz-al <pruiz-al@student.42.fr>          +#+  +:+       +#+        */
+/*   By: sbenitez <sbenitez@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/07 17:08:56 by sbenitez          #+#    #+#             */
-/*   Updated: 2025/05/29 21:27:08 by pruiz-al         ###   ########.fr       */
+/*   Updated: 2025/05/30 11:49:13 by sbenitez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,6 +106,75 @@ int		ft_has_commands(t_shell *shell);
 char	*ft_remove_quotes(char *tkn);
 void	ft_dequotize(t_shell *shell);
 
+// EXEC_CD_UTILS.C
+
+int		ft_check_errors(t_shell *shell, char *oldpwd, char *path);
+int		ft_update_pwd(t_shell *shell, char *oldpwd, char *pwd);
+int		ft_check_home_error(t_shell *shell, char *home, char *oldpwd);
+void	ft_update_home(t_shell *shell, char *oldpwd, char *pwd);
+
+// EXEC_CD.C
+
+int		cd_path(t_shell *shell, char *path);
+int		cd_home(t_shell *shell);
+int		cd_oldpwd(t_shell *shell);
+int		exec_cd(t_shell *shell, t_cmd *cmd);
+
+// EXEC_ECHO.C
+
+int		ft_check_flag(char *s);
+int		do_echo(t_cmd *cmd);
+int		exec_echo(t_cmd *cmd);
+
+// EXEC_ENV.C
+
+int		exec_env(t_shell *shell);
+char	**ft_modify_existing_env(char **env, char *str, int index);
+
+// EXEC_EXIT.X
+
+int		ft_isnum(char *str);
+void	free_exit(t_shell *ms);
+void	exec_exit(t_shell *ms, t_cmd *cmd, int prevfd);
+
+// EXEC_EXPORT_UTILS.C
+int		ft_search_env(char **env, char *str);
+char	*ft_get_key(char *str);
+int		ft_size_matrix(char **env);
+void	ft_swap(char **s1, char **s2);
+int		ft_strcmp_order(const char *s1, const char *s2);
+
+// EXEC_EXPORT_UTILS2.C
+
+char	*ft_find_plus_equal(char *str);
+char	**ft_create_new_env(char **env, char *str);
+char	*ft_process_new_var_string(char *str);
+char	*ft_create_appended_var(char *str, char *old_val, char *plus_pos);
+char	**ft_append_env_value(char **env, char *str, int index);
+
+// EXEC_EXPORT.C
+
+int		ft_check_env(char *str);
+char	**ft_add_modify_env(char **env, char *str, int flag);
+void	ft_sort_matrix(char **matrix);
+void	ft_print_export(char **env);
+int		exec_export(t_shell *shell, t_cmd *cmd);
+
+// EXEC_PWD.C
+
+int		exec_pwd(void);
+
+// EXEC_UNSET.C
+
+char	**ft_remove_env(char **env, char *str);
+int		exec_unset(t_shell *shell, t_cmd *cmd);
+
+// EXECUTER_COMMAND.C
+
+void	free_paths(char **paths, int i);
+char	*ft_path(char *path, char **comm);
+void	execute_command(t_shell *shell, t_cmd *cmd);
+
 // EXECUTER.C
 
 void	execute_builtin(t_shell *ms, t_cmd *cmd, int prevfd);
@@ -144,6 +213,12 @@ void	ft_process_token(t_shell *shell, t_token **temp);
 int		ft_has_commands(t_shell *shell);
 int		ft_get_commands(t_shell *shell);
 
+// HEREDOC_UTILS.C
+
+char	*ft_expand_variable(int *i, char *buffer, char **env, int exit_st);
+char	*ft_not_expand(int *i, char *buffer);
+char	*ft_expand_heredoc(char *buffer, char **env, int exit_st);
+
 // INIT_SHELL.C
 
 t_shell	*ft_init_shell(char **env);
@@ -165,6 +240,13 @@ void	ft_process_input(t_cmd *cmd, t_token *token);
 void	ft_process_output(t_cmd *cmd, t_token *token);
 void	ft_process_append(t_cmd *cmd, t_token *token);
 void	ft_process_heredoc(t_cmd *cmd, t_token *token);
+
+// REDIRECTIONS.C
+
+int		ft_redir_heredoc(t_shell *shell, t_cmd *cmd);
+int		ft_redir_infile(char *infile);
+int		ft_redir_outfile(char *outfile, int append);
+int		ft_redirections(t_shell *shell, t_cmd *cmd);
 
 // SIGNALS.C
 
@@ -194,79 +276,5 @@ void	*safe_malloc(size_t bytes);
 void	ft_print_tokens(t_token *token);
 char	**ft_copy_env(char **env);
 void	ft_print_cmdlst(t_cmd *cmd_lst);
-
-// EXECUTER_COMMAND.C
-
-void	free_paths(char **paths, int i);
-char	*ft_path(char *path, char **comm);
-void	execute_command(t_shell *shell, t_cmd *cmd);
-
-// REDIRECTIONS.C
-
-int		ft_redir_heredoc(t_shell *shell, t_cmd *cmd);
-int		ft_redir_infile(char *infile);
-int		ft_redir_outfile(char *outfile, int append);
-int		ft_redirections(t_shell *shell, t_cmd *cmd);
-
-// HEREDOC_UTILS.C
-
-char	*ft_expand_variable(int *i, char *buffer, char **env, int exit_st);
-char	*ft_not_expand(int *i, char *buffer);
-char	*ft_expand_heredoc(char *buffer, char **env, int exit_st);
-
-// EXEC_PWD.C
-
-int		exec_pwd(void);
-
-// EXEC_EXIT.X
-
-int		ft_isnum(char *str);
-void	free_exit(t_shell *ms);
-void	exec_exit(t_shell *ms, t_cmd *cmd, int prevfd);
-
-// EXEC_ECHO.C
-
-int		ft_check_flag(char *s);
-int		do_echo(t_cmd *cmd);
-int		exec_echo(t_cmd *cmd);
-
-// EXEC_ENV.C
-
-int		exec_env(t_shell *shell);
-
-// EXEC_EXPORT.C
-
-int		ft_check_env(char *str);
-char	**ft_add_modify_env(char **env, char *str, int flag);
-void	ft_sort_matrix(char **matrix);
-void	ft_print_export(char **env);
-int		exec_export(t_shell *shell, t_cmd *cmd);
-
-// EXEC_EXPORT_UTILS.C
-int		ft_search_env(char **env, char *str);
-char	*ft_find_value(char *str);
-char	*ft_get_key(char *str);
-int		ft_size_matrix(char **env);
-void	ft_swap(char **s1, char **s2);
-int		ft_strcmp_order(const char *s1, const char *s2);
-
-// EXEC_UNSET.C
-
-char	**ft_remove_env(char **env, char *str);
-int		exec_unset(t_shell *shell, t_cmd *cmd);
-
-// EXEC_CD.C
-
-int		cd_path(t_shell *shell, char *path);
-int		cd_home(t_shell *shell);
-int		cd_oldpwd(t_shell *shell);
-int		exec_cd(t_shell *shell, t_cmd *cmd);
-
-// EXEC_CD_UTILS.C
-
-int		ft_check_errors(t_shell *shell, char *oldpwd, char *path);
-int		ft_update_pwd(t_shell *shell, char *oldpwd, char *pwd);
-int		ft_check_home_error(t_shell *shell, char *home, char *oldpwd);
-void	ft_update_home(t_shell *shell, char *oldpwd, char *pwd);
 
 #endif

@@ -13,6 +13,7 @@ CFILES =	src/check_syntax.c \
 			src/exec_env.c \
 			src/exec_exit.c \
 			src/exec_export_utils.c \
+			src/exec_export_utils2.c \
 			src/exec_export.c \
 			src/exec_pwd.c \
 			src/exec_unset.c \

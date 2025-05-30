@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_export.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pruiz-al <pruiz-al@student.42.fr>          +#+  +:+       +#+        */
+/*   By: sbenitez <sbenitez@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/27 12:08:00 by sbenitez          #+#    #+#             */
-/*   Updated: 2025/05/29 22:00:29 by pruiz-al         ###   ########.fr       */
+/*   Updated: 2025/05/30 11:14:07 by sbenitez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,50 +30,24 @@ int	ft_check_env(char *str)
 	return (1);
 }
 
-char	**ft_add_modify_env(char **env, char *str, int flag) // 2 si es +=, 1 si es =
+char	**ft_add_modify_env(char **env, char *str, int flag)
 {
-	char	*key;
-	int		index;
-	int		size;
-	char	**new;
-	int		i;
+    char	*key;
+    int		index;
+    char	**new;
 
-	key = ft_get_key(str);
-	index = ft_search_env(env, key);
-	printf("key:%s, flag:%d, index:%d\n", key, flag, index);
-	free(key);
-	if (index != -1 && flag == 1)
-	{
-		printf("entra\n");
-		free(env[index]);
-		env[index] = ft_strdup(str);
-		return (env);
-	}
-	size = ft_size_matrix(env);
-	new = malloc(sizeof(char *) * (size + 2));
-	if (!new)
-		return (NULL);
-	i = -1;
-	while (++i < size)
-	{
-		new[i] = ft_strdup(env[i]);
-	}
-	if (flag == 1)
-		new[i++] = ft_strdup(str);
-	else
-	{
-		char *aux = ft_strdup(env[index]);
-		char *temp = ft_strchr(str, '=');
-		printf("aux:%s\n", aux);
-		free(env[index]);
-		env[index] = ft_strjoin(aux, &temp[1]);
-		free(aux);
-		i++;
-		free(new);
-		return (env);
-	}
-	new[i] = NULL;
-	return (ft_free_matrix(env), new);
+    key = ft_get_key(str);
+    index = ft_search_env(env, key);
+    free(key);
+    if (index != -1 && flag == 1)
+        return (ft_modify_existing_env(env, str, index));
+    if (index != -1 && flag == 2)
+        return (ft_append_env_value(env, str, index));
+    new = ft_create_new_env(env, str);
+    if (!new)
+        return (NULL);
+    ft_free_matrix(env);
+    return (new);
 }
 
 void	ft_sort_matrix(char **matrix)

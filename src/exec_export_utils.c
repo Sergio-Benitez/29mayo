@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_export_utils.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pruiz-al <pruiz-al@student.42.fr>          +#+  +:+       +#+        */
+/*   By: sbenitez <sbenitez@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/27 12:23:11 by sbenitez          #+#    #+#             */
-/*   Updated: 2025/05/29 21:34:02 by pruiz-al         ###   ########.fr       */
+/*   Updated: 2025/05/30 11:09:47 by sbenitez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,18 +27,6 @@ int	ft_search_env(char **env, char *str)
 	}
 	return (-1);
 }
-
-/* char	*ft_find_value(char *str)
-{
-	int		i;
-	char	*value;
-
-	i = 0;
-	while (str[i] != '=')
-		i++;
-	
-	return (value);
-} */
 
 char	*ft_get_key(char *str)
 {

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_env.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pruiz-al <pruiz-al@student.42.fr>          +#+  +:+       +#+        */
+/*   By: sbenitez <sbenitez@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/05/27 12:06:03 by sbenitez          #+#    #+#             */
-/*   Updated: 2025/05/29 20:26:35 by pruiz-al         ###   ########.fr       */
+/*   Created: 2025/05/30 11:26:49 by sbenitez          #+#    #+#             */
+/*   Updated: 2025/05/30 11:48:43 by sbenitez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,4 +25,11 @@ int	exec_env(t_shell *shell)
 		i++;
 	}
 	return (0);
+}
+
+char	**ft_modify_existing_env(char **env, char *str, int index)
+{
+	free(env[index]);
+	env[index] = ft_strdup(str);
+	return (env);
 }
