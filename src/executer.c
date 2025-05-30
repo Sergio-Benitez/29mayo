@@ -6,7 +6,7 @@
 /*   By: sbenitez <sbenitez@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/27 12:02:24 by sbenitez          #+#    #+#             */
-/*   Updated: 2025/05/30 11:53:55 by sbenitez         ###   ########.fr       */
+/*   Updated: 2025/05/30 14:15:50 by sbenitez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,8 +49,6 @@ void	child_process(t_cmd *cmd, int prevfd, int pipefd[2], t_shell *ms)
 		close(pipefd[0]);
 		close(pipefd[1]);
 	}
-//	if (ft_redirections(ms, cmd) == 1)
-//		exit (1);
 	if (cmd->is_btn)
 	{
 		execute_builtin(ms, cmd, prevfd);
@@ -64,9 +62,6 @@ void	child_process(t_cmd *cmd, int prevfd, int pipefd[2], t_shell *ms)
 
 void	parent_process(t_shell *ms, int *prevfd, int pipefd[2])
 {
-/* 	int	status;
-
-	status = 0; */
 	if (*prevfd != -1)
 		close(*prevfd);
 	if (ms->cmd_lst->next)
@@ -77,10 +72,7 @@ void	parent_process(t_shell *ms, int *prevfd, int pipefd[2])
 	else
 		*prevfd = -1;
 	g_signal_flag = 1;
-	//waitpid(pid, &status, 0);
-	//ft_check_exitstat(status, ms);
 }
-//LOS BUILTINS SOLO SE FORKEAN CUANDO HAY PIPELINE
 
 void	ft_wait_all_processes(pid_t *pids, t_shell *ms)
 {
@@ -105,7 +97,7 @@ void	ft_exec_commands(t_shell *ms)
 	int		pipefd[2];
 	int		prevfd;
 	t_cmd	*cmd;
-	pid_t	pids[99];
+	pid_t	pids[LOL];
 	int		i;
 
 	i = 0;

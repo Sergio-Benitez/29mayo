@@ -6,7 +6,7 @@
 /*   By: sbenitez <sbenitez@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/27 12:28:22 by sbenitez          #+#    #+#             */
-/*   Updated: 2025/05/29 17:11:16 by sbenitez         ###   ########.fr       */
+/*   Updated: 2025/05/30 14:23:48 by sbenitez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ char	*ft_path(char *path, char **comm)
 	char	*tmp;
 	int		i;
 
-	if (ft_strchr(comm[0], '/')) //if we get the route instead of the command
+	if (ft_strchr(comm[0], '/'))
 	{
 		if (access(comm[0], F_OK | X_OK) == 0)
 			return (ft_strdup(comm[0]));

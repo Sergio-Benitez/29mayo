@@ -6,7 +6,7 @@
 /*   By: sbenitez <sbenitez@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/07 17:08:56 by sbenitez          #+#    #+#             */
-/*   Updated: 2025/05/30 11:49:13 by sbenitez         ###   ########.fr       */
+/*   Updated: 2025/05/30 14:17:24 by sbenitez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@
 # define RR2 5
 # define LR1 6
 # define LR2 7
+# define LOL 99
 
 extern int	g_signal_flag;
 
@@ -208,6 +209,7 @@ void	ft_expand_var(t_shell *shell);
 
 // GET_COMMANDS.C //
 
+int		ft_cmdsize(t_cmd *lst);
 void	ft_fill_cmd(t_shell *shell, t_token *token, t_token **next_token);
 void	ft_process_token(t_shell *shell, t_token **temp);
 int		ft_has_commands(t_shell *shell);

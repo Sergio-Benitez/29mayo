@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pruiz-al <pruiz-al@student.42.fr>          +#+  +:+       +#+        */
+/*   By: sbenitez <sbenitez@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/07 17:06:58 by sbenitez          #+#    #+#             */
-/*   Updated: 2025/05/29 19:47:06 by pruiz-al         ###   ########.fr       */
+/*   Updated: 2025/05/30 14:18:19 by sbenitez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,7 @@
 
 int	ft_read_input(t_shell *shell)
 {
-//	if (shell->exit_status != 130)
-		shell->last_exit_st = shell->exit_status;
+	shell->last_exit_st = shell->exit_status;
 	ft_setup_signals();
 	shell->input = readline("minishell> ");
 	if (!shell->input)
@@ -25,7 +24,6 @@ int	ft_read_input(t_shell *shell)
 	}
 	if (g_signal_flag)
 	{
-	//	shell->exit_status = g_signal_flag;
 		shell->last_exit_st = g_signal_flag;
 	}
 	else
@@ -46,11 +44,8 @@ void	ft_minishell(t_shell *shell)
 		if (ft_find_dollar(shell))
 			ft_expand_var(shell);
 		ft_dequotize(shell);
-//		ft_print_tokens(shell->token);
 		if (shell->token && ft_get_commands(shell))
 		{
-//			ft_print_cmdlst(shell->cmd_lst);
-			//signal(SIGQUIT, ft_handle_backslash);
 			ft_exec_commands(shell);
 		}
 		ft_cleanup_shell(shell);

@@ -6,7 +6,7 @@
 /*   By: sbenitez <sbenitez@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/27 12:34:27 by sbenitez          #+#    #+#             */
-/*   Updated: 2025/05/29 16:10:04 by sbenitez         ###   ########.fr       */
+/*   Updated: 2025/05/30 14:18:01 by sbenitez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,6 @@ int	ft_redir_infile(char *infile)
 	fd = open(infile, O_RDONLY);
 	if (fd == -1)
 	{
-		//perror("Error reading infile\n");
 		return (1);
 	}
 	if (dup2(fd, STDIN_FILENO) == -1)
@@ -69,7 +68,6 @@ int	ft_redir_outfile(char *outfile, int append)
 		fd = open(outfile, O_CREAT | O_WRONLY | O_TRUNC, 0644);
 	if (fd == -1)
 	{
-		//perror("Error reading outfile\n");
 		return (1);
 	}
 	if (dup2(fd, STDOUT_FILENO) == -1)
